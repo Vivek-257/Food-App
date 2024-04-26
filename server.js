@@ -21,8 +21,9 @@ app.use((req, res, next) => {
     next();
   });
 app.use('/api/v1/test',require("./routes/testRoute") ) //api/v1/test is common for all routes
-app.use('/api/v1/auth',require("./routes/authRoutes") ) //api/v1/test is common for all auth routes
+app.use('/api/v1/auth',require("./routes/authRoutes") ) //api/v1/test is common for all auth routes like login and register
 app.use('/api/v1/user',require("./routes/userRoutes") )
+app.use('/api/v1/resturant', require("./routes/resturantRoutes"))
 
 app.get('/',(req,res)=>{
 return res.status(200).send("<h1>welcome to food server</h1>")
