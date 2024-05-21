@@ -88,4 +88,83 @@ res.status(200).send({
   })
 }
 }
-module.exports={createResturantController,getAllResturantController}
+
+const getResturantByIdController=async(req,res)=>{
+
+try {
+
+  const resturantId=req.params.id
+  if(!resturantId)
+  {
+    return res.status.send(404).send({
+
+      success:false,
+      message:'please provie resturant id'
+    })
+  }
+  const resturant=await resturantModel.findById(resturantId)
+  if(!resturant)
+  {
+
+    return res.status(404).send({
+      success:false,
+      message:'no resturant found',
+    })
+  }
+
+  res.status(200).send({
+    success:true,
+    resturant
+  })
+  
+} catch (error) {
+  console.log(error)
+  res.status(500).send({
+
+    success:false,
+    message:'Error in get resturant by id',
+    error
+  })
+}
+}
+
+const deleteResturanController=async(req,res)=>{
+
+
+  try {
+    
+    const resturantId=req.params.id
+    const resturant =await resturantModel.findById(resturantId)
+
+    console.log("id found----->",resturant)
+ 
+    if(!resturant)
+      {
+         return res.status(404).send({
+
+          success:false,
+          message:'no resturant found'
+         })
+
+      }
+      await resturantModel.findByIdAndDelete(resturantId)
+      return res.status(200).send({
+
+        success:true,
+        message:'resturant deleted successfully'
+      })
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({
+      success:false,
+      message:"error in deleting",
+      error
+    })
+  }
+}
+module.exports={createResturantController,getAllResturantController,getResturantByIdController,deleteResturanController}
+
+
+
+
+//await ka result bhi valiable me store hota hai 

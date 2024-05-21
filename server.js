@@ -24,6 +24,7 @@ app.use('/api/v1/test',require("./routes/testRoute") ) //api/v1/test is common f
 app.use('/api/v1/auth',require("./routes/authRoutes") ) //api/v1/test is common for all auth routes like login and register
 app.use('/api/v1/user',require("./routes/userRoutes") )
 app.use('/api/v1/resturant', require("./routes/resturantRoutes"))
+app.use('/api/v1/category', require('./routes/categoryRoutes'))
 
 app.get('/',(req,res)=>{
 return res.status(200).send("<h1>welcome to food server</h1>")
