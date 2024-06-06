@@ -66,4 +66,65 @@ res.status(404).send({
 }
 
 }
-module.exports={createCatController,getAllCatController}
+//update cat
+const updateCatController=async(req,res)=>{
+
+    const {id}=req.params
+    const {title}=req.body
+    try {
+          const updatedCategory=await categoryModel.findByIdAndUpdate(id,{title},{new:true})
+           if(!updatedCategory){
+
+            return res.status(404).send({
+                message:'no category by tht id found '
+            })
+           }
+
+           res.status(200).send({
+
+            success:true,
+            message:'category updated successfully'
+           })
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+success:false,
+message:'error in update cat api',
+error
+
+        })
+    }
+
+}
+
+const deleteCatController=async(req,res)=>{
+    const {id}=req.params
+try {
+
+const idToDelete=await categoryModel.findById(id);
+if(!idToDelete)
+    {
+return res.status(404).send({
+    success:false,
+    message:'cannot find id'
+})
+
+    }
+    await categoryModel.findByIdAndDelete(id)
+    res.status(200).send({
+        message:'id deleted successfully'
+    })
+    
+} catch (error) {
+    console.log(error)
+    req.res(500).status({
+success:false,
+message:'error in deletion',
+error
+
+    })
+}
+
+}
+module.exports={createCatController,getAllCatController,updateCatController,deleteCatController}

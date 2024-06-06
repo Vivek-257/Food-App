@@ -25,6 +25,8 @@ app.use('/api/v1/auth',require("./routes/authRoutes") ) //api/v1/test is common 
 app.use('/api/v1/user',require("./routes/userRoutes") )
 app.use('/api/v1/resturant', require("./routes/resturantRoutes"))
 app.use('/api/v1/category', require('./routes/categoryRoutes'))
+app.use('/api/v1/food', require('./routes/foodRoutes'))
+
 
 app.get('/',(req,res)=>{
 return res.status(200).send("<h1>welcome to food server</h1>")
